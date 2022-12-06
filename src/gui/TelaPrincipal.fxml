@@ -5,17 +5,17 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/19">
+<SplitPane dividerPositions="0.29797979797979796" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.TelaPrincipalController">
   <items>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <Button layoutX="40.0" layoutY="32.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Cadastrar" />
-            <Button layoutX="40.0" layoutY="74.0" mnemonicParsing="false" prefHeight="25.0" prefWidth="147.0" text="Consultar" />
-            <Button layoutX="92.0" layoutY="542.0" mnemonicParsing="false" text="Fechar" />
+            <Button fx:id="btCadastrar" layoutX="40.0" layoutY="32.0" mnemonicParsing="false" onAction="#onBtCadastrarAction" prefHeight="25.0" prefWidth="147.0" text="Cadastrar" />
+            <Button fx:id="btConsultar" layoutX="40.0" layoutY="74.0" mnemonicParsing="false" onAction="#onBtConsultarAction" prefHeight="25.0" prefWidth="147.0" text="Consultar" />
+            <Button fx:id="btFechar" layoutX="92.0" layoutY="542.0" mnemonicParsing="false" onAction="#onBtFecharAction" text="Fechar" />
          </children></AnchorPane>
     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
          <children>
-            <ImageView fitHeight="190.0" fitWidth="200.0" layoutX="179.0" layoutY="204.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="200.0" AnchorPane.leftAnchor="180.0" AnchorPane.rightAnchor="180.0" AnchorPane.topAnchor="200.0" />
+            <ImageView fx:id="imgView" fitHeight="350.0" fitWidth="350.0" layoutX="104.0" layoutY="124.0" nodeOrientation="RIGHT_TO_LEFT" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="124.0" AnchorPane.leftAnchor="104.0" AnchorPane.rightAnchor="103.0" AnchorPane.topAnchor="124.0" />
          </children></AnchorPane>
   </items>
 </SplitPane>
