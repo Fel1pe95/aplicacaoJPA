@@ -9,14 +9,15 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 	
-	private static Scene mainScene; 
+	private static Scene mainScene;
+	private static SplitPane splitPane;
 	@Override
 	public void start(Stage primaryStage) throws Exception {
 		
 		try {
 		
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/gui/TelaPrincipal.fxml"));
-		SplitPane splitPane = loader.load();
+		splitPane = loader.load();
 		
 		mainScene = new Scene(splitPane);
 		primaryStage.setScene(mainScene);
@@ -31,6 +32,14 @@ public class Main extends Application {
 	
 	public static void main(String[] args) {
 		launch(args);
+	}
+	
+	public static Scene getMainScene() {
+		return mainScene;
+	}
+	
+	public static SplitPane getSplitPane() {
+		return splitPane;
 	}
 
 	
