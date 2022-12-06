@@ -12,10 +12,16 @@ import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Pane;
 
 public class TelaPrincipalController implements Initializable {
-
+	
+	@FXML
+	private static Pane leftPane;
+	@FXML
+	private static Pane rightPane;
+	
+	
 	@FXML
 	private Button btCadastrar;
 	@FXML
@@ -56,9 +62,9 @@ public class TelaPrincipalController implements Initializable {
 	public synchronized <T> void carregarTela(String absoluteName, Consumer<T> initializingAction) {
 		try {
 			FXMLLoader loader = new FXMLLoader(getClass().getResource(absoluteName));
-			AnchorPane newPane = loader.load();
+			Pane newPane = loader.load();
 			SplitPane splitPane = Main.getSplitPane();
-			AnchorPane rightPane = (AnchorPane) splitPane.getItems().get(1);
+			rightPane = (Pane) splitPane.getItems().get(1);
 			rightPane.getChildren().clear();
 			rightPane.getChildren().addAll(newPane.getChildren());
 
@@ -66,5 +72,14 @@ public class TelaPrincipalController implements Initializable {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public static Pane getLeftPane() {
+		return leftPane;
+	}
+	
+	public static Pane getRighPane() {
+		return rightPane;
+	}
+	
 }
+
