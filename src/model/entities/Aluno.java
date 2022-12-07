@@ -70,5 +70,12 @@ public class Aluno implements Serializable {
 		return Objects.equals(matricula, other.matricula) && Objects.equals(nome, other.nome)
 				&& Objects.equals(telefone, other.telefone);
 	}
+	
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Matricula: " + matricula + " Nome: " + nome + " Telefone: " + telefone);
+		return sb.toString();
+	}
 
 }
