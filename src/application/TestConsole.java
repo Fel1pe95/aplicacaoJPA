@@ -1,13 +1,10 @@
 package application;
 
-import model.dao.AlunoDao;
-import model.dao.DaoFactory;
-
 public class TestConsole {
 
 	public static void main(String[] args) {
 
-		AlunoDao aluno = DaoFactory.creatAlunoDao();
+		//AlunoDao aluno = DaoFactory.creatAlunoDao();
 
 		// ----- Adcionar aluno ao banco de dados
 		// aluno.insert(new Aluno(null, "Andressa", "998637810"));
