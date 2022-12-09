@@ -12,6 +12,8 @@ import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.control.SplitPane;
 import javafx.scene.layout.Pane;
+import model.entities.Aluno;
+import model.service.AlunoService;
 
 public class TelaPrincipalController implements Initializable {
 
@@ -24,7 +26,9 @@ public class TelaPrincipalController implements Initializable {
 
 	@FXML
 	public void onBtCadastrarAction() {
-		carregarTela("/gui/TelaCadastro.fxml", x -> {
+		carregarTela("/gui/TelaCadastro.fxml", (TelaCadastroController controller) -> {
+			controller.setService(new AlunoService());
+			controller.setEntity(new Aluno());
 		});
 	}
 
@@ -51,6 +55,9 @@ public class TelaPrincipalController implements Initializable {
 			Node rightPane = splitPane.getItems().get(1);
 			splitPane.getItems().remove(rightPane);
 			splitPane.getItems().add(newPane);
+			
+			T controller = loader.getController();
+			initializingAction.accept(controller);
 
 		} catch (Exception e) {
 			e.printStackTrace();

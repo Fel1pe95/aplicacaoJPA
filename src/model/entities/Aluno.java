@@ -3,6 +3,7 @@ package model.entities;
 import java.io.Serializable;
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -18,14 +19,17 @@ public class Aluno implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer matricula;
 	private String nome;
+	@Column(nullable = false)
+	private String CPF;
 	private String telefone;
 
 	public Aluno() {
 	}
 
-	public Aluno(Integer matricula, String nome, String telefone) {
+	public Aluno(Integer matricula, String nome, String CPF, String telefone) {
 		this.matricula = matricula;
 		this.nome = nome;
+		this.CPF = CPF;
 		this.telefone = telefone;
 	}
 
@@ -43,6 +47,14 @@ public class Aluno implements Serializable {
 
 	public void setNome(String nome) {
 		this.nome = nome;
+	}
+	
+	public String getCPF() {
+		return CPF;
+	}
+
+	public void setCPF(String CPF) {
+		this.CPF = CPF;
 	}
 
 	public String getTelefone() {
@@ -77,5 +89,4 @@ public class Aluno implements Serializable {
 		sb.append("Matricula: " + matricula + " Nome: " + nome + " Telefone: " + telefone);
 		return sb.toString();
 	}
-
 }
