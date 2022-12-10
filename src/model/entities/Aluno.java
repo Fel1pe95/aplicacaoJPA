@@ -21,6 +21,7 @@ public class Aluno implements Serializable {
 	private String nome;
 	@Column(nullable = false)
 	private String CPF;
+	@Column(nullable = true)
 	private String telefone;
 
 	public Aluno() {

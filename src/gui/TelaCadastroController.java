@@ -1,9 +1,12 @@
 package gui;
 
 import java.net.URL;
+import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.Set;
 
 import application.Main;
+import db.DbException;
 import gui.util.Alerts;
 import gui.util.Constraints;
 import javafx.event.ActionEvent;
@@ -18,6 +21,7 @@ import javafx.scene.control.SplitPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import model.entities.Aluno;
+import model.exceptions.ValidationException;
 import model.service.AlunoService;
 
 public class TelaCadastroController implements Initializable {
@@ -58,11 +62,12 @@ public class TelaCadastroController implements Initializable {
 		try {
 			entity = getData();
 			service.saveOrUpdate(entity);
-			
+
 			Alerts.showAlert("Sucesso", null, entity.toString(), AlertType.INFORMATION);
-		} catch (Exception e) {
-			e.printStackTrace();
-			Alerts.showAlert("Erro ao cadastrar", null, "Nenhum dado encontrado", AlertType.ERROR);
+		} catch (ValidationException e) {
+			setErrorsMessages(e.getErrors());
+		} catch (DbException e) {
+			Alerts.showAlert(null, null, "Erro ao cadastar Aluno", AlertType.ERROR);
 		}
 
 	}
@@ -95,11 +100,34 @@ public class TelaCadastroController implements Initializable {
 
 	public Aluno getData() {
 		Aluno aluno = new Aluno();
+		ValidationException exception = new ValidationException("Validation Error");
 		aluno.setMatricula(null);
+
+		if (txtNome.getText() == null || txtNome.getText().trim().equals("")) {
+			exception.addError("nome", "campo nao pode ser vazio");
+		}
 		aluno.setNome(txtNome.getText());
+		if (txtCPF.getText() == null || txtCPF.getText().trim().equals("")) {
+			exception.addError("CPF", "campo nao pode ser vazio");
+		}
 		aluno.setCPF(txtCPF.getText());
-		aluno.setTelefone(txtTelefone.getText());
+		if (txtTelefone.getText() == null || txtTelefone.getText().trim().equals("")) {
+			aluno.setTelefone("Não cadastrado");
+		} else {
+			aluno.setTelefone(txtTelefone.getText());
+		}
+		if (exception.getErrors().size() > 0) {
+			throw exception;
+		}
+
 		return aluno;
+	}
+
+	private void setErrorsMessages(Map<String, String> errors) {
+		Set<String> fields = errors.keySet();
+		labelErroNome.setText(fields.contains("nome") ? errors.get("nome") : "");
+		labelErroCPF.setText(fields.contains("CPF") ? errors.get("CPF") : "");
+		labelErroTelefone.setText(fields.contains("telefone") ? errors.get("telefone") : "");
 	}
 
 	public AlunoService getService() {
